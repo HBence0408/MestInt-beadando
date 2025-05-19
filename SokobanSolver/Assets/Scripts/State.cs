@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.Rendering;
 using UnityEngine;
 
-public class State 
+public class State : ICloneable
 {
 
     private static char[,] map =
@@ -244,5 +245,31 @@ public class State
         }
 
         return true;
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (obj == null)
+        {
+            return false;
+        }
+
+        if (obj is State)
+        {
+            State s = (State)obj;
+            return s.IsState && s.Balls.Contains(this.balls[0]) && s.Balls.Contains(this.balls[1]) && s.Balls.Contains(this.balls[2]) && s.man == this.man;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public object Clone()
+    {
+        State temp = new State();
+        temp.man = this.Man;
+        temp.balls = this.Balls;
+        return temp;
     }
 }
