@@ -66,4 +66,122 @@ public class State
             return true;
         }
     }
+
+    public bool IsGoalState
+    {
+        get
+        {
+            foreach ((int,int) ball in balls)
+            {
+                if (map[ball.Item1,ball.Item2] != '1')
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+
+    public bool IsOperator(Direction direction)
+    {
+        switch (direction)
+        {
+            case Direction.UP:
+                if (map[man.Item1 + 1, man.Item2] == '#')
+                {
+                    return false;
+                }
+                foreach ((int, int) ball in balls)
+                {
+                    if (ball.Item1 == man.Item1 + 1 && ball.Item2 == man.Item2)
+                    {
+                        if (map[ball.Item1 + 1, ball.Item2] == '#')
+                        {
+                            return false;
+                        }
+                        foreach ((int, int) b in balls)
+                        {
+                            if (b == (ball.Item1 + 1, ball.Item2))
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+                break;
+            case Direction.DOWN:
+                if (map[man.Item1 - 1, man.Item2] == '#')
+                {
+                    return false;
+                }
+                foreach ((int, int) ball in balls)
+                {
+                    if (ball.Item1 == man.Item1 - 1 && ball.Item2 == man.Item2)
+                    {
+                        if (map[ball.Item1 - 1, ball.Item2] == '#')
+                        {
+                            return false;
+                        }
+                        foreach ((int, int) b in balls)
+                        {
+                            if (b == (ball.Item1 - 1, ball.Item2))
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+                break;
+            case Direction.RIGHT:
+                if (map[man.Item1, man.Item2 + 1] == '#')
+                {
+                    return false;
+                }
+                foreach ((int, int) ball in balls)
+                {
+                    if (ball.Item1 == man.Item1 && ball.Item2 == man.Item2 + 1)
+                    {
+                        if (map[ball.Item1 , ball.Item2 + 1] == '#')
+                        {
+                            return false;
+                        }
+                        foreach ((int, int) b in balls)
+                        {
+                            if (b == (ball.Item1, ball.Item2 + 1))
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+                break;
+            case Direction.LEFT:
+                if (map[man.Item1, man.Item2 - 1] == '#')
+                {
+                    return false;
+                }
+                foreach ((int, int) ball in balls)
+                {
+                    if (ball.Item1 == man.Item1 && ball.Item2 == man.Item2 - 1)
+                    {
+                        if (map[ball.Item1, ball.Item2 - 1] == '#')
+                        {
+                            return false;
+                        }
+                        foreach ((int, int) b in balls)
+                        {
+                            if (b == (ball.Item1, ball.Item2 - 1))
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
 }
