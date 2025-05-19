@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.Rendering;
 using UnityEngine;
 
@@ -182,6 +183,66 @@ public class State
             default:
                 break;
         }
+        return true;
+    }
+
+    public bool ApplyOperator(Direction direction)
+    {
+        if (!IsOperator(direction))
+        {
+            return false;
+        }
+
+        switch (direction)
+        {
+            case Direction.UP:
+                man.Item1++;
+                for (int i = 0; i < balls.Length; i++)
+                {
+                    if (balls[i] == man)
+                    {
+                        balls[i].Item1++;
+                        break;
+                    }
+                }
+                break;
+            case Direction.DOWN:
+                man.Item1--;
+                for (int i = 0; i < balls.Length; i++)
+                {
+                    if (balls[i] == man)
+                    {
+                        balls[i].Item1--;
+                        break;
+                    }
+                }
+                break;
+            case Direction.RIGHT:
+                man.Item2++;
+                for (int i = 0; i < balls.Length; i++)
+                {
+                    if (balls[i] == man)
+                    {
+                        balls[i].Item2++;
+                        break;
+                    }
+                }
+                break;
+            case Direction.LEFT:
+                man.Item2--;
+                for (int i = 0; i < balls.Length; i++)
+                {
+                    if (balls[i] == man)
+                    {
+                        balls[i].Item2--;
+                        break;
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+
         return true;
     }
 }
