@@ -21,6 +21,8 @@ public class State : ICloneable
         {'#', '#', '#', '#', '#', '#', '#', '#','#'}
     };
 
+    public static char[,] Map { get => map; }
+    
     private (int, int)[] balls;
     private (int, int) man;
 
@@ -83,6 +85,17 @@ public class State : ICloneable
 
             return true;
         }
+    }
+
+    private State()
+    {
+        
+    }
+
+    public State((int, int) man, (int, int)[] balls)
+    {
+        this.man = man;
+        this.balls = balls;
     }
 
     public bool IsOperator(Direction direction)
