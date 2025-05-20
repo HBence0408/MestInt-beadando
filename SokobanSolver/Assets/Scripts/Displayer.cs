@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Displayer : MonoBehaviour
@@ -51,14 +52,25 @@ public class Displayer : MonoBehaviour
 
         //solution = backtrack.Solution(terminalNode);
 
+
         //Depthfirst depthfirst = new Depthfirst(new Node(new State(manStartPos, ballsStartPos)));
         //Node terminalNode = depthfirst.FindTerminalNode();
 
         //solution = depthfirst.Solution(terminalNode);
 
+
+        Task astar = Task.Run(() => Astar());
+
+    }
+
+    private void Astar()
+    {
+        (int, int)[] ballsStartPos = { (2, 2), (2, 3), (3, 2) };
+        (int, int) manStartPos = (1, 1);
         AStar astar = new AStar(new Node(new State(manStartPos, ballsStartPos)));
         Node terminalNode = astar.FindTerminalNode();
         solution = astar.Solution(terminalNode);
+        Debug.Log("astar has found the way");
     }
 
     private void Update()
