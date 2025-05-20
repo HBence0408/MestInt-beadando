@@ -87,6 +87,34 @@ public class State : ICloneable
         }
     }
 
+    public bool IsSolveAble
+    {
+        get
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if ((map[balls[i].Item1 + 1, balls[i].Item2] == '#') && (map[balls[i].Item1, balls[i].Item2 + 1] == '#') && map[balls[i].Item1, balls[i].Item2] != '1')
+                {
+                    return false;
+                }
+                if ((map[balls[i].Item1 - 1, balls[i].Item2] == '#') && (map[balls[i].Item1, balls[i].Item2 + 1] == '#') && map[balls[i].Item1, balls[i].Item2] != '1')
+                {
+                    return false;
+                }
+                if ((map[balls[i].Item1 + 1, balls[i].Item2] == '#') && (map[balls[i].Item1, balls[i].Item2 - 1] == '#') && map[balls[i].Item1, balls[i].Item2] != '1')
+                {
+                    return false;
+                }
+                if ((map[balls[i].Item1 - 1, balls[i].Item2] == '#') && (map[balls[i].Item1, balls[i].Item2 - 1] == '#') && map[balls[i].Item1, balls[i].Item2] != '1')
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+
     private State()
     {
         

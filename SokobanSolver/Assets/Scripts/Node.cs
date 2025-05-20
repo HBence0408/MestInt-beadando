@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Node
+public class Node :IComparable
 {
     private State state;
     private Node parent;
     private int depth;
+    private int hCost;
 
+    public int HCost { get => hCost; set => hCost = value; }
     public State State { get => state; }
     public Node Parent { get => parent; }
     public int Depth { get => depth; }
@@ -65,6 +67,27 @@ public class Node
         }
 
         return children;
+    }
+
+    public int CompareTo(object obj)
+    {
+        if (obj == null || obj is not Node)
+        {
+            Debug.LogWarning(obj + " cannot be compared to Node");
+        }
+
+        Node n = obj as Node;
+
+            if (this.HCost > n.HCost)
+            {
+                return -1;
+            }
+            else
+            {
+                return 1;
+            }
+        
+        
     }
 }
 

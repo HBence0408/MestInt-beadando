@@ -43,33 +43,43 @@ public class Displayer : MonoBehaviour
             }
         }
 
+        (int, int)[] ballsStartPos = { (2, 2), (2, 3), (3, 2) };
+        (int, int) manStartPos = (1, 1);
+        // Backtrack backtrack = new Backtrack(10, new Node(new State(manStartPos, ballsStartPos)));
 
+        //Node terminalNode = backtrack.FindTerminalNode();
+
+        //solution = backtrack.Solution(terminalNode);
+
+        //Depthfirst depthfirst = new Depthfirst(new Node(new State(manStartPos, ballsStartPos)));
+        //Node terminalNode = depthfirst.FindTerminalNode();
+
+        //solution = depthfirst.Solution(terminalNode);
+
+        AStar astar = new AStar(new Node(new State(manStartPos, ballsStartPos)));
+        Node terminalNode = astar.FindTerminalNode();
+        solution = astar.Solution(terminalNode);
     }
 
     private void Update()
     {
 
-        if (solve)
-        {
-            (int, int)[] ballsStartPos = { (2, 2), (2, 3), (3, 2) };
-            (int, int) manStartPos = (1, 1);
-            Backtrack backtrack = new Backtrack(100, new Node(new State(manStartPos, ballsStartPos)));
+        //if (solve)
+        //{
+           
 
-            Node terminalNode = backtrack.FindTerminalNode();
-
-            solution = backtrack.Solution(terminalNode);
-            solve = false;
-        }
+        //    solve = false;
+        //}
 
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             State s = solution.Pop();
 
-            man.position = new Vector3(s.Man.Item2, s.Man.Item1, 0);
+            man.position = new Vector3(s.Man.Item2, s.Man.Item1, 1);
             for (int i = 0; i < 3; i++)
             {
-                balls[i].position = new Vector3(s.Balls[i].Item2, s.Balls[i].Item1, 0);
+                balls[i].position = new Vector3(s.Balls[i].Item2, s.Balls[i].Item1, 1);
             }
         }
     }
